@@ -61,7 +61,7 @@ class Model(list):
         self.run_model_species_names = []
         self.run_model_species_starting_values = []
         self.run_model_parameters = {}
-
+        self.rates_over_time={}
         self.y = []
 
         self.logging = logging
@@ -230,7 +230,7 @@ class Model(list):
         yprime = np.zeros(len(y))
 
         for reaction_class in self:
-            yprime += reaction_class.reaction(y, self.run_model_species_names, self.run_model_parameters)
+            yprime += reaction_class.reaction(y, self.run_model_species_names, self.run_model_parameters,self.rates_over_time,t)
 
         return yprime
 
