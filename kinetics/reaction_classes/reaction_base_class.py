@@ -113,7 +113,7 @@ class Reaction():
     def calculate_rate(self, substrates, parameters):
         return 0
 
-    def reaction(self, y, substrate_names, parameter_dict):
+    def reaction(self, y, substrate_names, parameter_dict, rates_over_time,time):
         if self.substrate_indexes == []:
             self.get_indexes(substrate_names) # need to move this to the model
 
@@ -132,7 +132,7 @@ class Reaction():
         if len(self.modifiers) != 0:
             substrates, parameters = self.calculate_modifiers(substrates, parameters)
 
-        rate = self.calculate_rate(substrates, parameters)
+        rate = self.calculate_rate(substrates, parameters,rates_over_time,time)
 
         y_prime = calculate_yprime(y, rate, self.substrates, self.products, substrate_names)
         y_prime = self.modify_product(y_prime, substrate_names)
